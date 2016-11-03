@@ -43,8 +43,7 @@ module.exports = function () {
   * @return {boolean,object} false if not found, the node containing 
   * the data otherwise
   */
-  public.search =
-  function (data, node = root_node) {
+  public.search = function (data, node = root_node) {
     if (!node) return false
     if (node.data === data) {
       return node
@@ -59,8 +58,7 @@ module.exports = function () {
   * @param data {string,number} 
   *   data to insert
   */
-  public.insert =
-  function (data, node = root_node) {
+  public.insert = function (data, node = root_node) {
     if (!node) {
       root_node = create_node(data)
     } else {
@@ -118,28 +116,14 @@ module.exports = function () {
   * Deletes a node from the tree
   * @param data {string} data contained by the node to delete
   */
-  public.delete = 
-    function (data) {
-      var node = this.search(data)
-      if (node.left && node.right) {
-        delete_two(node)
-      } else {
-        delete_not_two(node)
-      }
+  public.delete = function (data) {
+    var node = this.search(data)
+    if (node.left && node.right) {
+      delete_two(node)
+    } else {
+      delete_not_two(node)
     }
-
-  /*
-  * Print the tree
-  * @param node {object} node to start from.
-  *   default: root_node
-  */
-  public.print = 
-    function (node = root_node, indent = 3) {
-      if (!node) return
-      console.log('\t'.repeat(indent) + node.data)
-      this.print(node.left, indent - 1)
-      this.print(node.right, indent + 1)
-    }
+  }
 
   return public
 }
