@@ -9,86 +9,84 @@
 */
 
 module.exports = function (size) {
+  
+  public = {}
+  var store = []
 
-	var store = [] 
+  /*
+  * pushes an item on stack
+  *
+  * @param {object} item
+  *	item to be pushed on stack
+  */
+  public.push =  function (item) {
+    if (this.isFull()) {
+      console.log('stack is full')
+    } else {
+      store[store.length] = item
+    }
+  }
 
-	return {
+  /*
+  * pops item on top of the stack
+  *
+  * @return
+  *	the item on top of the stack
+  */
+  public.pop = function () {
+    if (this.isEmpty()) {
+      console.log('stack is empty')
+    } else {
+      var item = store[store.length - 1]
+      store.splice(store.length - 1, 1)
+      return item
+    }
+  }
 
-		/*
-		* pushes an item on stack
-		*
-		* @param {object} item
-		*	item to be pushed on stack
-		*/
-		push: function (item) {
-			if (this.isFull()) {
-				console.log('stack is full')
-			} else {
-				store[store.length] = item
-			}
-		},
+  /*
+  * shows the item on top of the stack
+  *
+  * @return
+  *	item on top of the stack 
+  */
+  public.peek = function () {
+    if (this.isEmpty()) {
+      console.log('stack is empty')
+    } else {
+      return store[store.length - 1]
+    }
+  }
 
-		/*
-		* pops item on top of the stack
-		*
-		* @return
-		*	the item on top of the stack
-		*/
-		pop: function () {
-			if (this.isEmpty()) {
-				console.log('stack is empty')
-			} else {
-				var item = store[store.length-1]
-				store.splice(store.length-1,1)
-				return item
-			}
-		},
+  /*
+  * check if stack if full. If no size was specified it returns false
+  *
+  * @return
+  *	true if stack is full, false otherwise
+  */
+  public.isFull = function () {
+    if (size && store.length >= size) {
+      return true
+    }
+    return false
+  }
 
-		/*
-		* shows the item on top of the stack
-		*
-		* @return
-		*	item on top of the stack 
-		*/
-		peek: function () {
-			if (this.isEmpty()) {
-				console.log('stack is empty')
-			} else {
-				return store[store.length-1];
-			}
-		},
+  /*
+  * check if stack if empty
+  *
+  * @return
+  *	true if stack is empty, false otherwise
+  */
+  public.isEmpty = function () {
+    return !store.length
+  }
 
-		/*
-		* check if stack if full. If no size was specified it returns false
-		*
-		* @return
-		*	true if stack is full, false otherwise
-		*/
-		isFull: function () {
-			if (size && store.length >= size) {
-				return true
-			}
-			return false
-		},
+  /*
+  * prints the current state of the stack
+  */
+  public.show = function () {
+    console.log(store.slice().reverse())
+  }
 
-		/*
-		* check if stack if empty
-		*
-		* @return
-		*	true if stack is empty, false otherwise
-		*/
-		isEmpty: function () {
-			return !store.length
-		},
-
-		/*
-		* prints the current state of the stack
-		*/
-		show: function () {
-			console.log(store.slice().reverse());
-		}
-
-	}
-	
-
+  return public
+  
 }
