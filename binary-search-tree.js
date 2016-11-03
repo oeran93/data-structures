@@ -1,7 +1,7 @@
 /*
 * @file
 * 
-* Simple implementation of a binary tree data structure
+* Simple implementation of a binary search tree data structure
 *
 * Allows search, insert and delete
 */
