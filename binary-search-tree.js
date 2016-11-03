@@ -1,3 +1,10 @@
+/*
+* @file
+* 
+* Simple implementation of a binary tree data structure
+*
+* Allows search, insert and delete
+*/
 module.exports = function () {
 
   var public = {}
