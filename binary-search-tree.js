@@ -32,6 +32,7 @@ module.exports = function () {
     var n_node = Object.create(_node)
     n_node.data = data
     n_node.left = left
+    n_node.right = right
     n_node.parent = parent
     return n_node
   }
