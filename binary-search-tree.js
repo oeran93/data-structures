@@ -125,5 +125,16 @@ module.exports = function () {
     }
   }
 
+  /*
+  * Prints the inorder traversal of the tree
+  * @param node {object} root node
+  */
+  public.inorder_traversal = function (node = root_node) {
+    if (!node) return
+    this.inorder_traversal(node.left)
+    console.log(node.data)
+    this.inorder_traversal(node.right)
+  }
+
   return public
 }
