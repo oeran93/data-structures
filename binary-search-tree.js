@@ -21,18 +21,12 @@ module.exports = function () {
   /*
   * Creates a new node
   * @param data {string,number} data
-  * @param left {object} left node
-  *   default: null
-  * @param right {object} right node
-  *   default: null
   * @param parent {object} parent node
   *   default: null
   */
-  function create_node (data, left = null, right = null, parent = null) {
+  function create_node (data, parent = null) {
     var n_node = Object.create(_node)
     n_node.data = data
-    n_node.left = left
-    n_node.right = right
     n_node.parent = parent
     return n_node
   }
@@ -65,13 +59,13 @@ module.exports = function () {
     } else {
       if (data < node.data) {
         if (!node.left) {
-          node.left = create_node(data,null,null,node)
+          node.left = create_node(data,node)
         } else {
           return public.insert(data, node.left)
         }
       } else if (data > node.data) {
         if (!node.right) {
-          node.right = create_node(data,null,null,node)
+          node.right = create_node(data,node)
         } else {
           return public.insert(data, node.right)
         }
