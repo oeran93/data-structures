@@ -68,10 +68,10 @@ module.exports = function (order = 'max') {
   * @return {boolean} false if it could not push the data. True otherwise
   */
   public.push = function (data = null) {
-  	if (data == null) return false
-  	heap.push(data)
-  	order_push()
-  	return true
+    if (data == null) return false
+    heap.push(data)
+    order_push()
+    return true
   }
 
   /*
@@ -80,11 +80,11 @@ module.exports = function (order = 'max') {
   * @param index {Number} index of the item to order
   */
   function order_push (index = heap.length) {
-  	if (index == 1) return
-  	if (wrong(heap[parent(index)-1], heap[index-1])) {
-  		swap(parent(index),index)
-  		order_push(parent(index))
-  	}
+    if (index == 1) return
+    if (wrong(heap[parent(index)-1], heap[index-1])) {
+      swap(parent(index),index)
+      order_push(parent(index))
+    }
   }
 
   /*
@@ -92,12 +92,12 @@ module.exports = function (order = 'max') {
   * @return {boolean, data} false if heap was empty. data of root node
   */
   public.pop = function () {
-  	if (heap.length == 0) return false
-  	var res = heap[0]
-  	heap[0] = heap[heap.length-1]
-  	heap = heap.slice(0,-1)
-  	order_pop()
-  	return res
+    if (heap.length == 0) return false
+    var res = heap[0]
+    heap[0] = heap[heap.length-1]
+    heap = heap.slice(0,-1)
+    order_pop()
+    return res
   }
 
   /*
@@ -106,21 +106,21 @@ module.exports = function (order = 'max') {
   * @param index {Number} index of the item to order
   */
   function order_pop (index = 1) {
-  	if (left(index) && right(index)) {
-  		if (heap[left(index)-1] > heap[right(index)-1]) {
-  			swap(index,left(index))
-  			order_pop(left(index))
-  		} else {
-  			swap(index,right(index))
-  			order_pop(right(index))
-  		}
-  	} else if (right(index)) {
-  		swap(index,right(index))
-  		order_pop(right(index))
-  	} else if (left(index)) {
-  		swap(index,left(index))
-  		order_pop(left(index))
-  	}
+    if (left(index) && right(index)) {
+      if (heap[left(index)-1] > heap[right(index)-1]) {
+        swap(index,left(index))
+        order_pop(left(index))
+      } else {
+        swap(index,right(index))
+        order_pop(right(index))
+      }
+    } else if (right(index)) {
+      swap(index,right(index))
+      order_pop(right(index))
+    } else if (left(index)) {
+      swap(index,left(index))
+      order_pop(left(index))
+    }
   }
 
   return public
