@@ -7,6 +7,7 @@
 * INDEX IS INTENDED TO START AT 1 EXCEPT WHEN ACCESSING HEAP ARRAY
 */
 module.exports = function (order = 'max') {
+  
   var public = {}
 
   var heap = []
