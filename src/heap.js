@@ -19,7 +19,7 @@ module.exports = function (order = 'max') {
   * determines if parent and child are in the wrong order
   * changes depending on min or max heap
   */ 
-  var wrong = order === 'max' ? (a, b) => a < b : (a, b) => a > b
+  var compare = order === 'max' ? (a, b) => a > b : (a, b) => a < b
 
   /*
   * calculates the parent of the given node
@@ -36,7 +36,7 @@ module.exports = function (order = 'max') {
   * @return {Number} left child index
   */
   function left (index) {
-    return index*2 > heap.length ? false : index*2
+    return index*2
   }
 
   /*
@@ -45,7 +45,7 @@ module.exports = function (order = 'max') {
   * @return {Number} right child index
   */
   function right (index) {
-    return (index*2)+1 > heap.length ? false : (index*2)+1
+    return (index*2)+1
   }
 
   /*
@@ -81,7 +81,7 @@ module.exports = function (order = 'max') {
   */
   function order_push (index = heap.length) {
     if (index == 1) return
-    if (wrong(heap[parent(index)-1], heap[index-1])) {
+    if (compare(heap[index-1],heap[parent(index)-1])) {
       swap(parent(index),index)
       order_push(parent(index))
     }
@@ -106,23 +106,22 @@ module.exports = function (order = 'max') {
   * @param index {Number} index of the item to order
   */
   function order_pop (index = 1) {
-    if (left(index) && right(index)) {
-      if (heap[left(index)-1] > heap[right(index)-1]) {
-        swap(index,left(index))
-        order_pop(left(index))
-      } else {
-        swap(index,right(index))
-        order_pop(right(index))
+    var swap_index
+    if (compare(heap[left(index)-1], heap[index-1])) {
+      swap_index = left(index)
+    }
+    if (compare(heap[right(index)-1], heap[index-1])) {
+      if (!compare(heap[left(index)-1], heap[right(index)-1])) {
+        swap_index = right(index)
       }
-    } else if (right(index)) {
-      swap(index,right(index))
-      order_pop(right(index))
-    } else if (left(index)) {
-      swap(index,left(index))
-      order_pop(left(index))
+    }
+    if (swap_index != null) {
+      swap(index, swap_index)
+      order_pop(swap_index)
     }
   }
 
   return public
 
 }
+
