@@ -55,11 +55,11 @@ module.exports = function (order = 'max') {
   * @return {boolean} false if it could not swap the numbers. True otherwise
   */
   function swap (a, b) {
-  	if (a > heap.length || b > heap.length) return false
-  	var temp = heap[a-1]
-  	heap[a-1] = heap[b-1]
-  	heap[b-1] = temp
-  	return true
+    if (a > heap.length || b > heap.length) return false
+    var temp = heap[a-1]
+    heap[a-1] = heap[b-1]
+    heap[b-1] = temp
+    return true
   }
 
   /*
