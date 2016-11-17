@@ -1,7 +1,7 @@
 /*
 * @file
 * 
-*	pass in 'max' or 'min' to get a max or min heap
+* pass in 'max' or 'min' to get a max or min heap
 * max-heap by default
 *
 * INDEX IS INTENDED TO START AT 1 EXCEPT WHEN ACCESSING HEAP ARRAY
